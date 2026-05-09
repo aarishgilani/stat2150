@@ -8,4 +8,10 @@ PARENT_DIR="$(dirname "$SCRIPT_DIR")"
 cp "$PARENT_DIR/concept_scope.md" "$SCRIPT_DIR/concept_scope.md"
 cp "$PARENT_DIR/study_resources.md" "$SCRIPT_DIR/study_resources.md"
 
-echo "Copied markdown files into docs/"
+# Copy plans
+mkdir -p "$SCRIPT_DIR/plans"
+for f in "$PARENT_DIR"/plans/*.md; do
+    [ -f "$f" ] && cp "$f" "$SCRIPT_DIR/plans/"
+done
+
+echo "Copied markdown files and plans into docs/"

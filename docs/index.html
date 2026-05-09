@@ -12,11 +12,19 @@
         <nav>
             <button class="tab active" data-target="concept_scope">Concept Scope</button>
             <button class="tab" data-target="study_resources">Study Resources</button>
+            <button class="tab" data-target="plans">Study Plans</button>
         </nav>
     </header>
     <main>
         <article id="concept_scope" class="panel active"></article>
         <article id="study_resources" class="panel"></article>
+        <article id="plans" class="panel">
+            <div class="plans-nav">
+                <h2>Study Plans</h2>
+                <div class="plan-list" id="plan-list"></div>
+            </div>
+            <div class="plan-content" id="plan-content"></div>
+        </article>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
@@ -46,6 +54,26 @@
 
         loadMarkdown('./concept_scope.md', 'concept_scope');
         loadMarkdown('./study_resources.md', 'study_resources');
+
+        // Plans
+        const plans = [
+            { file: 'plans/part1_r_fundamentals.md', title: 'Part 1: R Programming Fundamentals' }
+        ];
+
+        const planList = document.getElementById('plan-list');
+        const planContent = document.getElementById('plan-content');
+
+        plans.forEach((plan, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'plan-btn';
+            btn.textContent = plan.title;
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.plan-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                loadMarkdown(plan.file, 'plan-content');
+            });
+            planList.appendChild(btn);
+        });
     </script>
 </body>
 </html>

@@ -160,3 +160,53 @@ main input[type="checkbox"] {
     main table { font-size: 0.8rem; }
     main th, main td { padding: 0.35rem 0.5rem; }
 }
+
+/* Plans */
+.plans-nav h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.plan-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.plan-btn {
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    color: var(--fg);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.plan-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.plan-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+/* Collapsible details/summary (for quiz answers) */
+main details {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    margin: 0.5rem 0;
+}
+
+main summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+main details[open] summary {
+    margin-bottom: 0.5rem;
+}
