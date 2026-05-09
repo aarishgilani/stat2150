@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAT 2150 — Study Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>STAT 2150 — Study Hub</h1>
+        <nav>
+            <button class="tab active" data-target="concept_scope">Concept Scope</button>
+            <button class="tab" data-target="study_resources">Study Resources</button>
+        </nav>
+    </header>
+    <main>
+        <article id="concept_scope" class="panel active"></article>
+        <article id="study_resources" class="panel"></article>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const panels = document.querySelectorAll('.panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.target).classList.add('active');
+            });
+        });
+
+        async function loadMarkdown(file, targetId) {
+            try {
+                const res = await fetch(file);
+                if (!res.ok) throw new Error(`Failed to load ${file}`);
+                const md = await res.text();
+                document.getElementById(targetId).innerHTML = marked.parse(md);
+            } catch (e) {
+                document.getElementById(targetId).innerHTML =
+                    `<p class="error">Could not load ${file}. Run <code>./build.sh</code> to copy markdown files into docs/.</p>`;
+            }
+        }
+
+        loadMarkdown('./concept_scope.md', 'concept_scope');
+        loadMarkdown('./study_resources.md', 'study_resources');
+    </script>
+</body>
+</html>
