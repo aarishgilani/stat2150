@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aarishgilani.github.io/stat2150/sitemap.xml
